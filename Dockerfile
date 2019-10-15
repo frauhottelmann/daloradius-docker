@@ -2,8 +2,9 @@ FROM ubuntu:18.04
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-RUN DEBIAN_FRONTEND=noninteractive \
- && apt-get update \
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt-get update \
  && echo debconf debconf/frontend select Noninteractive | debconf-set-selections \
  && echo tzdata tzdata/Areas select Europe | debconf-set-selections \
  && echo tzdata tzdata/Zones/Europe select Berlin | debconf-set-selections \
@@ -12,8 +13,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-RUN DEBIAN_FRONTEND=noninteractive \
- && apt-get update \
+RUN apt-get update \
  && echo mysql-server mysql-server/root_password password initial | debconf-set-selections \
  && echo mysql-server mysql-server/root_password_again password initial | debconf-set-selections \
  && apt-get install --yes --no-install-recommends \
