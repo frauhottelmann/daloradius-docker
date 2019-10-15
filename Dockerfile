@@ -2,7 +2,7 @@ FROM ubuntu:18.04
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-ENV DEBIAN_FRONTEND noninteractive
+ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
  && echo debconf debconf/frontend select Noninteractive | debconf-set-selections \
