@@ -9,7 +9,8 @@ RUN DEBIAN_FRONTEND=noninteractive \
  && echo tzdata tzdata/Zones/Europe select Berlin | debconf-set-selections \
  && apt-get install --yes --no-install-recommends \
                     apt-utils tzdata \
- && apt-get clean
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
 
 RUN DEBIAN_FRONTEND=noninteractive \
  && apt-get update \
@@ -21,7 +22,8 @@ RUN DEBIAN_FRONTEND=noninteractive \
                     mysql-server mysql-client libmysqlclient-dev \
  && mkdir -p /var/run/mysqld \
  && chown mysql:mysql /var/run/mysqld \
- && apt-get clean
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
 
 COPY supervisor-apache2.conf /etc/supervisor/conf.d/apache2.conf
 COPY supervisor-mysql.conf /etc/supervisor/conf.d/mysql.conf
