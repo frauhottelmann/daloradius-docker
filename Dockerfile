@@ -3,6 +3,8 @@ FROM ubuntu:18.04
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 ARG DEBIAN_FRONTEND=noninteractive
+ENV ROOTDBPASS "rootdbpass"
+ENV DALODBPASS "dalodbpass"
 
 RUN apt-get update \
  && echo debconf debconf/frontend select Noninteractive | debconf-set-selections \
@@ -39,6 +41,7 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
 
 COPY supervisor-apache2.conf /etc/supervisor/conf.d/apache2.conf
+COPY supervisor-freeradius.conf /etc/supervisor/conf.d/freeradius.conf
 
 COPY init.sh /cbs/
 COPY supervisor-freeradius.conf /cbs/
