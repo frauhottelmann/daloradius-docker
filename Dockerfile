@@ -3,6 +3,7 @@ FROM ubuntu:18.04
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 ARG DEBIAN_FRONTEND=noninteractive
+ENV MYSQL_PASSWORD dalodbpass
 
 RUN apt-get update \
  && echo debconf debconf/frontend select Noninteractive | debconf-set-selections \
@@ -14,16 +15,37 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update \
- && echo mysql-server mysql-server/root_password password initial | debconf-set-selections \
- && echo mysql-server mysql-server/root_password_again password initial | debconf-set-selections \
  && apt-get install --yes --no-install-recommends \
-                    apache2 libapache2-mod-php \
-                    php php-common php-gd php-curl php-mail php-mail-mime php-db php-mysqlnd \
-                    mysql-server mysql-client libmysqlclient-dev \
- && mkdir -p /var/run/mysqld \
- && chown mysql:mysql /var/run/mysqld \
+                    apache2 \
+                    apg \
+                    freeradius \
+                    freeradius-common \
+                    freeradius-utils \
+                    freeradius-mysql \
+                    libapache2-mod-php \
+                    php \
+                    php-common \
+                    php-gd \
+                    php-curl \
+                    php-mail \
+                    php-mail-mime \
+                    php-db \
+                    php-pear \
+                    php-mysqlnd \
+                    mysql-client \
+                    libmysqlclient-dev \
+                    unzip \
+                    wget \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
 COPY supervisor-apache2.conf /etc/supervisor/conf.d/apache2.conf
-COPY supervisor-mysql.conf /etc/supervisor/conf.d/mysql.conf
+COPY supervisor-freeradius.conf /etc/supervisor/conf.d/freeradius.conf
+
+COPY init.sh /cbs/
+COPY supervisor-freeradius.conf /cbs/
+COPY freeradius-default-site /cbs/
+
+ENTRYPOINT ["sh", "/cbs/init.sh"]
+
+EXPOSE 1812 1813 80
