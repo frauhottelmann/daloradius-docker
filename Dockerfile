@@ -3,7 +3,13 @@ FROM ubuntu:18.04
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 ARG DEBIAN_FRONTEND=noninteractive
+ENV MYSQL_USER radius
 ENV MYSQL_PASSWORD dalodbpass
+ENV MYSQL_HOST localhost
+ENV MYSQL_PORT 3306
+ENV MYSQL_DATABASE radius
+ENV DALO_VERSION v1.1-1
+
 ENV TZ Europe/Berlin
 
 RUN apt-get update \
