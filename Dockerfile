@@ -44,6 +44,6 @@ COPY init.sh /cbs/
 COPY supervisor-freeradius.conf /cbs/
 COPY freeradius-default-site /cbs/
 
-CMD ["sh", "/cbs/init.sh"]
+ENTRYPOINT ["sh", "/cbs/init.sh"]
 
 EXPOSE 1812 1813 80
