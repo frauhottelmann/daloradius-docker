@@ -34,6 +34,7 @@ RUN apt-get update \
                     php-mysqlnd \
                     mysql-client \
                     libmysqlclient-dev \
+                    supervisor \
                     unzip \
                     wget \
  && apt-get clean \
