@@ -31,7 +31,7 @@ RUN apt-get update \
                     unzip \
                     wget \
  && apt-get clean \
- && rm -rf /var/lib/apt/lists/*
+ && rm -rf /var/lib/apt/lists/* \
  && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 COPY supervisor-apache2.conf /etc/supervisor/conf.d/apache2.conf
