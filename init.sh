@@ -17,8 +17,8 @@ chown -R www-data:www-data /var/www/html/daloradius
 chmod 644 /var/www/html/daloradius/library/daloradius.conf.php
 
 # Seed Database
-mysql -u "$MYSQL_USER" --password="$MYSQL_PASSWORD" "$MYSQL_DATABASE" < /etc/freeradius/3.0/mods-config/sql/main/mysql/schema.sql 
-mysql -u "$MYSQL_USER" --password="$MYSQL_PASSWORD" "$MYSQL_DATABASE" < /var/www/html/daloradius/contrib/db/mysql-daloradius.sql 
+mysql -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE" < /etc/freeradius/3.0/mods-config/sql/main/mysql/schema.sql 
+mysql -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE" < /var/www/html/daloradius/contrib/db/mysql-daloradius.sql 
 
 # Enable SQL in freeradius
 cat /cbs/freeradius-default-site > /etc/freeradius/3.0/sites-available/default
