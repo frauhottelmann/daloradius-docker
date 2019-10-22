@@ -3,8 +3,7 @@ FROM ubuntu:18.04
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 ARG DEBIAN_FRONTEND=noninteractive
-ENV ROOTDBPASS "rootdbpass"
-ENV DALODBPASS "dalodbpass"
+ENV MYSQL_PASSWORD "dalodbpass"
 
 RUN apt-get update \
  && echo debconf debconf/frontend select Noninteractive | debconf-set-selections \
