@@ -9,11 +9,11 @@ DEBIAN_FRONTEND=noninteractive
 cat /cbs/supervisor-freeradius.conf > /etc/supervisor/conf.d/freeradius.conf
 
 # Download and unzip Daloradius
-wget https://github.com/lirantal/daloradius/archive/$daloradiusversion.zip
-unzip $daloradiusversion.zip 
-rm $daloradiusversion.zip 
-mv daloradius-master /var/www/html/daloradius 
-chown -R www-data:www-data /var/www/html/daloradius 
+wget https://github.com/lirantal/daloradius/archive/$DALO_VERSION.zip
+unzip $DALO_VERSION.zip
+rm $DALO_VERSION.zip
+mv daloradius-$DALO_VERSION /var/www/html/daloradius
+chown -R www-data:www-data /var/www/html/daloradius
 chmod 644 /var/www/html/daloradius/library/daloradius.conf.php
 
 # Seed Database
