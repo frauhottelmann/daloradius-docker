@@ -47,6 +47,7 @@ COPY supervisor-freeradius.conf /etc/supervisor/conf.d/freeradius.conf
 COPY init.sh /cbs/
 COPY supervisor-freeradius.conf /cbs/
 COPY freeradius-default-site /cbs/
+COPY supervisor.conf /etc/
 
 ENTRYPOINT ["sh", "/cbs/init.sh"]
 
