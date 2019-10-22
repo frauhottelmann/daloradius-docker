@@ -14,11 +14,13 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update \
- && echo mysql-server mysql-server/root_password password initial | debconf-set-selections \
- && echo mysql-server mysql-server/root_password_again password initial | debconf-set-selections \
  && apt-get install --yes --no-install-recommends \
                     apache2 \
                     apg \
+                    freeradius \
+                    freeradius-common \
+                    freeradius-utils \
+                    freeradius-mysql \
                     libapache2-mod-php \
                     php \
                     php-common \
@@ -26,19 +28,17 @@ RUN apt-get update \
                     php-curl \
                     php-mail \
                     php-mail-mime \
-                    php-db php-mysqlnd \
-                    mysql-server \
+                    php-db \
+                    php-pear \
+                    php-mysqlnd \
                     mysql-client \
                     libmysqlclient-dev \
                     unzip \
                     wget \
- && mkdir -p /var/run/mysqld \
- && chown mysql:mysql /var/run/mysqld \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
 COPY supervisor-apache2.conf /etc/supervisor/conf.d/apache2.conf
-COPY supervisor-mysql.conf /etc/supervisor/conf.d/mysql.conf
 
 COPY init.sh /cbs/
 COPY supervisor-freeradius.conf /cbs/
