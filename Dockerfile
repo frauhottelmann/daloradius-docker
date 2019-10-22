@@ -4,18 +4,12 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 ARG DEBIAN_FRONTEND=noninteractive
 ENV MYSQL_PASSWORD dalodbpass
-
-RUN apt-get update \
- && echo debconf debconf/frontend select Noninteractive | debconf-set-selections \
- && echo tzdata tzdata/Areas select Europe | debconf-set-selections \
- && echo tzdata tzdata/Zones/Europe select Berlin | debconf-set-selections \
- && apt-get install --yes --no-install-recommends \
-                    apt-utils tzdata \
- && apt-get clean \
- && rm -rf /var/lib/apt/lists/*
+ENV TZ Europe/Berlin
 
 RUN apt-get update \
  && apt-get install --yes --no-install-recommends \
+                    apt-utils \
+                    tzdata \
                     apache2 \
                     apg \
                     freeradius \
@@ -38,6 +32,7 @@ RUN apt-get update \
                     wget \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
+ && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 COPY supervisor-apache2.conf /etc/supervisor/conf.d/apache2.conf
 COPY supervisor-freeradius.conf /etc/supervisor/conf.d/freeradius.conf
