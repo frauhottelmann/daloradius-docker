@@ -35,7 +35,7 @@ RUN apt-get update \
                     php-mail-mime \
                     php-db \
                     php-pear \
-                    php-mysqlnd \
+                    php-mysql \
                     mysql-client \
                     libmysqlclient-dev \
                     supervisor \
