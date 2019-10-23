@@ -6,16 +6,6 @@ echo 'echo "Initialization error" 1>&2' >> /cbs/init.sh
 
 DEBIAN_FRONTEND=noninteractive
 
-cat /cbs/supervisor-freeradius.conf > /etc/supervisor/conf.d/freeradius.conf
-
-# Download and unzip Daloradius
-wget https://github.com/lirantal/daloradius/archive/v"$DALO_VERSION".zip
-unzip v"$DALO_VERSION".zip
-rm v"$DALO_VERSION".zip
-mv daloradius-"$DALO_VERSION" /var/www/html/daloradius
-chown -R www-data:www-data /var/www/html/daloradius
-chmod 644 /var/www/html/daloradius/library/daloradius.conf.php
-
 # Seed Database
 mysql -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE" < /etc/freeradius/3.0/mods-config/sql/main/mysql/schema.sql 
 mysql -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE" < /var/www/html/daloradius/contrib/db/mysql-daloradius.sql 
