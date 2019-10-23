@@ -7,8 +7,8 @@ echo 'echo "Initialization error" 1>&2' >> /cbs/init.sh
 DEBIAN_FRONTEND=noninteractive
 
 # Seed Database
-mysql -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE" < /etc/freeradius/3.0/mods-config/sql/main/mysql/schema.sql 
-mysql -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE" < /var/www/html/daloradius/contrib/db/mysql-daloradius.sql 
+mysql -h "$MYSQL_HOST" -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE" < /etc/freeradius/3.0/mods-config/sql/main/mysql/schema.sql 
+mysql -h "$MYSQL_HOST" -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE" < /var/www/html/daloradius/contrib/db/mysql-daloradius.sql 
 
 # Enable SQL in freeradius
 cat /cbs/freeradius-default-site > /etc/freeradius/3.0/sites-available/default
