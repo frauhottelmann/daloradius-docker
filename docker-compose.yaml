@@ -13,11 +13,11 @@ services:
       - '1813:1813/udp'
       - '80:80'
     environment:
-      MYSQL_HOST: radius-mysql
+      MYSQL_HOST: "radius-mysql"
       MYSQL_PORT: 3306
-      MYSQL_DATABASE: radius
-      MYSQL_USER: radius
-      MYSQL_PASSWORD: dalodbpass
+      MYSQL_DATABASE: "radius"
+      MYSQL_USER: "radius"
+      MYSQL_PASSWORD: "dalodbpass"
     volumes:
       - ./radius/clients.conf:/etc/freeradius/3.0/clients.conf
       - ./radius/eap:/etc/freeradius/3.0/mods-available/eap
@@ -28,9 +28,9 @@ services:
     container_name: radius-mysql
     restart: always
     environment:
-      MYSQL_DATABASE: radius
-      MYSQL_USER: radius
-      MYSQL_PASSWORD: dalodbpass
-      MYSQL_ROOT_PASSWORD: dalorootpass
+      MYSQL_DATABASE: "radius"
+      MYSQL_USER: "radius"
+      MYSQL_PASSWORD: "dalodbpass"
+      MYSQL_ROOT_PASSWORD: "dalorootpass"
     volumes:
       - "./radius-mysql:/var/lib/mysql"
