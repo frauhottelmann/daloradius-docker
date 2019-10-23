@@ -44,7 +44,7 @@ RUN apt-get update \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* \
  && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
- && pear install --onlyreqdeps DB \
+ && pear install -a DB \
  && pear install -a Mail \
  && pear install -a Mail_Mime
 
