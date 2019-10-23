@@ -17,7 +17,7 @@ services:
       MYSQL_PORT: 3306
       MYSQL_DATABASE: radius
       MYSQL_USER: radius
-      MYSQL_PASSWORD: "your_radius_password"
+      MYSQL_PASSWORD: dalodbpass
     volumes:
       - ./radius/clients.conf:/etc/freeradius/3.0/clients.conf
       - ./radius/eap:/etc/freeradius/3.0/mods-available/eap
@@ -30,7 +30,7 @@ services:
     environment:
       MYSQL_DATABASE: radius
       MYSQL_USER: radius
-      MYSQL_PASSWORD: "your_radius_password"
-      MYSQL_ROOT_PASSWORD: "your_root_password"
+      MYSQL_PASSWORD: dalodbpass
+      MYSQL_ROOT_PASSWORD: dalorootpass
     volumes:
       - "./radius-mysql:/var/lib/mysql"
