@@ -43,16 +43,16 @@ RUN apt-get update \
                     wget \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* \
- && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
- && pear install --onlyreqdeps DB
- && pear install -a Mail
+ && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
+ && pear install --onlyreqdeps DB \
+ && pear install -a Mail \
  && pear install -a Mail_Mime
 
-RUN wget https://github.com/lirantal/daloradius/archive/v"$DALO_VERSION".zip
- && unzip v"$DALO_VERSION".zip
- && rm v"$DALO_VERSION".zip
- && mv daloradius-"$DALO_VERSION" /var/www/html/daloradius
- && chown -R www-data:www-data /var/www/html/daloradius
+RUN wget https://github.com/lirantal/daloradius/archive/v"$DALO_VERSION".zip \
+ && unzip v"$DALO_VERSION".zip \
+ && rm v"$DALO_VERSION".zip \
+ && mv daloradius-"$DALO_VERSION" /var/www/html/daloradius \
+ && chown -R www-data:www-data /var/www/html/daloradius \
  && chmod 644 /var/www/html/daloradius/library/daloradius.conf.php
 
 COPY supervisor-apache2.conf /etc/supervisor/conf.d/apache2.conf
