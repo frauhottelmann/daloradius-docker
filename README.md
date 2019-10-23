@@ -18,7 +18,7 @@ standard value: *3306*
 ### MYSQL_DATABASE
 standard value: *radius*
 ### TZ
-standard value: *Europe/Berlin*
+standard value: *Europe/Berlin* - (see List of tz time zones)[https://en.wikipedia.org/wiki/List_of_tz_database_time_zones]
 
 ---
 ### DALO_VERSION
