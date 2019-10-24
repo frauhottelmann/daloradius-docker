@@ -30,13 +30,15 @@ CMD ["sh", "/cbs/init.sh"]
 
 RUN apt-get update \
  && apt-get install --yes --no-install-recommends \
+                    apt-utils \
                     tzdata \
                     apache2 \
                     libapache2-mod-php \
                     cron \
+                    freeradius-config \
+                    freeradius-utils \
                     freeradius \
                     freeradius-common \
-                    freeradius-utils \
                     freeradius-mysql \
                     php \
                     php-common \
