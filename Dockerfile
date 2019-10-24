@@ -38,7 +38,7 @@ RUN apt-get update \
                     php-db \
                     php-pear \
                     php-mysql \
-                    mysql-client \
+                    mariadb-client \
                     libmysqlclient-dev \
                     supervisor \
                     unzip \
