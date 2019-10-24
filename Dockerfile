@@ -25,15 +25,14 @@ CMD ["sh", "/cbs/init.sh"]
 
 RUN apt-get update \
  && apt-get install --yes --no-install-recommends \
-                    apt-utils \
                     tzdata \
                     apache2 \
-                    apg \
+                    libapache2-mod-php \
+                    cron \
                     freeradius \
                     freeradius-common \
                     freeradius-utils \
                     freeradius-mysql \
-                    libapache2-mod-php \
                     php \
                     php-common \
                     php-gd \
@@ -46,8 +45,8 @@ RUN apt-get update \
                     mysql-client \
                     libmysqlclient-dev \
                     supervisor \
-                    unzip \
-                    wget \
+#                    unzip \
+#                    wget \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* \
  && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
