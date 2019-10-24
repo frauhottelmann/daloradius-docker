@@ -4,8 +4,6 @@ services:
     image: frauhottelmann/freeradius-daloradius
     container_name: radius
     restart: always
-    links:
-      - "radius-mysql"
     depends_on:
       - "radius-mysql" 
     ports:
