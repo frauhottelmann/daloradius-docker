@@ -32,5 +32,5 @@ services:
       - MYSQL_USER=radius
       - MYSQL_PASSWORD=dalodbpass
       - MYSQL_ROOT_PASSWORD=dalorootpass
-#    volumes:
-#      - "./radius-mysql:/var/lib/mysql"
+    volumes:
+      - "./radius-mysql:/var/lib/mysql"
