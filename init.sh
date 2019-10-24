@@ -6,6 +6,11 @@ echo 'echo "Initialization error" 1>&2' >> /cbs/init.sh
 
 DEBIAN_FRONTEND=noninteractive
 
+#wait for MySQL-Server to be ready
+while ! mysqladmin ping -h"$MYSQL_HOST" --silent; do
+    sleep 1
+done
+
 # Seed Database
 mysql -h "$MYSQL_HOST" -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE" < /etc/freeradius/3.0/mods-config/sql/main/mysql/schema.sql 
 mysql -h "$MYSQL_HOST" -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE" < /var/www/html/daloradius/contrib/db/mysql-daloradius.sql 
