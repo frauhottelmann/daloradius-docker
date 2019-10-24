@@ -1,5 +1,10 @@
 FROM ubuntu:18.04
 
+LABEL maintainer="frauhottelmann" \
+      dockerfile-version="1.0" \
+      description="Docker image with freeradius, daloradius, apache2, php \
+                   You need to supply your own MySQL-Server."
+
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 ARG DEBIAN_FRONTEND=noninteractive
