@@ -22,7 +22,7 @@ services:
 #      - ./ssl/fullchain.pem:/etc/freeradius/3.0/certs/fullchain.pem
 #      - ./ssl/privkey.pem:/etc/freeradius/3.0/certs/privkey.pem
   radius-mysql:
-    image: mysql:5.7.28
+    image: mariadb:10.1.41
     container_name: radius-mysql
     restart: always
     environment:
