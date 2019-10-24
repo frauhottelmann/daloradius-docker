@@ -1,7 +1,7 @@
 version: "3"
 services:
   radius:
-    image: frauhottelmann/freeradius-daloradius
+    image: frauhottelmann/daloradius-docker
     container_name: radius
     restart: always
     depends_on:
