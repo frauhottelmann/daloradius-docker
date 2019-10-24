@@ -17,17 +17,6 @@ ENV MYSQL_DATABASE radius
 
 ENV TZ Europe/Berlin
 
-EXPOSE 1812 1813 80
-
-COPY supervisor-apache2.conf /etc/supervisor/conf.d/apache2.conf
-COPY supervisor-freeradius.conf /etc/supervisor/conf.d/freeradius.conf
-COPY freeradius-default-site /etc/freeradius/3.0/sites-available/default
-
-COPY init.sh /cbs/
-COPY supervisor.conf /etc/
-
-CMD ["sh", "/cbs/init.sh"]
-
 RUN apt-get update \
  && apt-get install --yes --no-install-recommends \
                     apt-utils \
@@ -69,3 +58,14 @@ RUN wget https://github.com/lirantal/daloradius/archive/v"$DALO_VERSION".zip \
  && mv daloradius-"$DALO_VERSION" /var/www/html/daloradius \
  && chown -R www-data:www-data /var/www/html/daloradius \
  && chmod 644 /var/www/html/daloradius/library/daloradius.conf.php
+
+EXPOSE 1812 1813 80
+
+COPY supervisor-apache2.conf /etc/supervisor/conf.d/apache2.conf
+COPY supervisor-freeradius.conf /etc/supervisor/conf.d/freeradius.conf
+COPY freeradius-default-site /etc/freeradius/3.0/sites-available/default
+
+COPY init.sh /cbs/
+COPY supervisor.conf /etc/
+
+CMD ["sh", "/cbs/init.sh"]
