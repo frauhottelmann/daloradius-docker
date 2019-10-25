@@ -1,9 +1,15 @@
 # Daloradius
-
 ## About
-* Docker image for Daloradius
-* includes freeradius 3, Apache, php
-* needs a separate MariaDB or MySQL server
+
+* Docker image for Daloradius based on Ubuntu 18.04
+* includes freeradius 3, Apache, php, MariaDB-client
+* needs a separate MariaDB
+
+## Tags
+
+* versions correspond to Daloradius verisons
+* the tags are prefixed by the platform
+* right now I build amd64 and aarch64
 
 ## Environment variables
 
