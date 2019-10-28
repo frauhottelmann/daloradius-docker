@@ -1,7 +1,7 @@
 FROM ubuntu:18.04
 
 LABEL maintainer="frauhottelmann" \
-      dockerfile-version="1.0" \
+      dockerfile-version="1.1" \
       description="Docker image with freeradius, daloradius, apache2, php \
                    You need to supply your own MySQL-Server."
 
@@ -29,6 +29,7 @@ RUN apt-get update \
                     freeradius \
                     freeradius-common \
                     freeradius-mysql \
+                    net-tools \
                     php \
                     php-common \
                     php-gd \
@@ -50,11 +51,11 @@ RUN apt-get update \
  && pear install -a Mail \
  && pear install -a Mail_Mime
 
-ENV DALO_VERSION 1.1-1
+ENV DALO_VERSION 1.1-2
 
-RUN wget https://github.com/lirantal/daloradius/archive/v"$DALO_VERSION".zip \
- && unzip v"$DALO_VERSION".zip \
- && rm v"$DALO_VERSION".zip \
+RUN wget https://github.com/lirantal/daloradius/archive/"$DALO_VERSION".zip \
+ && unzip "$DALO_VERSION".zip \
+ && rm "$DALO_VERSION".zip \
  && mv daloradius-"$DALO_VERSION" /var/www/html/daloradius \
  && chown -R www-data:www-data /var/www/html/daloradius \
  && chmod 644 /var/www/html/daloradius/library/daloradius.conf.php
