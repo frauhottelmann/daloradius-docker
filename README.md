@@ -29,8 +29,8 @@ standard value: *Europe/Berlin* - [see List of tz time zones](https://en.wikiped
 ---
 ### DALO_VERSION
 used for version control
----
 
+---
 ## Docker-compose example
 
 ```yaml
