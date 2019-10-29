@@ -33,4 +33,4 @@ used for version control
 ---
 ## Docker-compose example
 
-docker-compose.yaml
+https://github.com/frauhottelmann/daloradius-docker/blob/9089d3a8e34183779ae156004bf30fb6d0e0fc1a/docker-compose.yaml#L1-L34
