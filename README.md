@@ -32,7 +32,7 @@ used for version control
 
 ## Docker-compose example
 
-´´´yaml
+```yaml
 version: "3"
 services:
   radius:
@@ -67,4 +67,4 @@ services:
       - MYSQL_ROOT_PASSWORD=dalorootpass
     volumes:
       - "./radius-mysql:/var/lib/mysql"
-´´´
+```
