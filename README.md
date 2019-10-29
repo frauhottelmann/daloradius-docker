@@ -33,4 +33,39 @@ used for version control
 ---
 ## Docker-compose example
 
-https://github.com/frauhottelmann/daloradius-docker/blob/9089d3a8e34183779ae156004bf30fb6d0e0fc1a/docker-compose.yaml#L1-L34
+```yaml
+version: "3"
+services:
+  radius:
+    image: frauhottelmann/daloradius-docker
+    container_name: radius
+    restart: always
+    depends_on:
+      - "radius-mysql" 
+    ports:
+      - '1812:1812/udp'
+      - '1813:1813/udp'
+      - '80:80'
+    environment:
+      - MYSQL_HOST=radius-mysql
+      - MYSQL_PORT=3306
+      - MYSQL_DATABASE=radius
+      - MYSQL_USER=radius
+      - MYSQL_PASSWORD=dalodbpass
+#    volumes:
+#      - ./radius/clients.conf:/etc/freeradius/3.0/clients.conf
+#      - ./radius/eap:/etc/freeradius/3.0/mods-available/eap
+#      - ./ssl/fullchain.pem:/etc/freeradius/3.0/certs/fullchain.pem
+#      - ./ssl/privkey.pem:/etc/freeradius/3.0/certs/privkey.pem
+  radius-mysql:
+    image: mariadb:10.1.41
+    container_name: radius-mysql
+    restart: always
+    environment:
+      - MYSQL_DATABASE=radius
+      - MYSQL_USER=radius
+      - MYSQL_PASSWORD=dalodbpass
+      - MYSQL_ROOT_PASSWORD=dalorootpass
+    volumes:
+      - "./radius-mysql:/var/lib/mysql"
+```
