@@ -8,7 +8,7 @@ DEBIAN_FRONTEND=noninteractive
 
 #wait for MySQL-Server to be ready
 while ! mysqladmin ping -h"$MYSQL_HOST" --silent; do
-    sleep 1
+    sleep 20
 done
 
 # Seed Database
