@@ -33,6 +33,8 @@ used for version control
 ---
 ## Docker-compose example
 
+If you are using armhf you have to change the MariaDB image. I have provided an example below as a comment.
+
 ```yaml
 version: "3"
 services:
@@ -58,7 +60,7 @@ services:
 #      - ./ssl/fullchain.pem:/etc/freeradius/3.0/certs/fullchain.pem
 #      - ./ssl/privkey.pem:/etc/freeradius/3.0/certs/privkey.pem
   radius-mysql:
-    image: mariadb:10.1.41
+    image: mariadb:10.1.41 # use image: linuxserver/mariadb:arm32v7-110.3.18mariabionic-ls37 for RaspberryPi
     container_name: radius-mysql
     restart: always
     environment:
