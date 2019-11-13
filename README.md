@@ -9,7 +9,7 @@
 
 * versions correspond to Daloradius verisons
 * the tags are prefixed by the platform
-* right now I build amd64 and aarch64
+* right now I build amd64, aarch64 and armhf
 
 ## Environment variables
 
