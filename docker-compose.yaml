@@ -22,7 +22,7 @@ services:
 #      - ./ssl/fullchain.pem:/etc/freeradius/3.0/certs/fullchain.pem
 #      - ./ssl/privkey.pem:/etc/freeradius/3.0/certs/privkey.pem
   radius-mysql:
-    image: mariadb:10.1.41 # use image: linuxserver/mariadb:arm32v7-110.3.18mariabionic-ls37 for RaspberryPi
+    image: mariadb:10.3 # use image: linuxserver/mariadb:arm32v7-110.3.18mariabionic-ls37 for RaspberryPi
     container_name: radius-mysql
     restart: always
     environment:
