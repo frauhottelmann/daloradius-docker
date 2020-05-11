@@ -4,7 +4,7 @@
 
 ## About
 
-* Docker image for Daloradius based on Ubuntu 18.04
+* Docker image for Daloradius based on Ubuntu 20.04
 * includes freeradius 3, Apache, php, MariaDB-client
 * needs a separate MariaDB
 
