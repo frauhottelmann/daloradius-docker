@@ -1,7 +1,7 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 LABEL maintainer="frauhottelmann" \
-      dockerfile-version="1.1" \
+      dockerfile-version="1.2" \
       description="Docker image with freeradius, daloradius, apache2, php \
                    You need to supply your own MySQL-Server."
 
