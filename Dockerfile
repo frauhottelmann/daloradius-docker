@@ -3,7 +3,7 @@ FROM ubuntu:20.04
 LABEL maintainer="frauhottelmann" \
       dockerfile-version="1.2" \
       description="Docker image with freeradius, daloradius, apache2, php \
-                   You need to supply your own MySQL-Server."
+                   You need to supply your own MariaDB-Server."
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
