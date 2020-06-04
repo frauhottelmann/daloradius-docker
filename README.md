@@ -7,6 +7,8 @@
 * Docker image for Daloradius based on Ubuntu 20.04
 * includes freeradius 3, Apache, php, MariaDB-client
 * needs a separate MariaDB
+* access under `your-ip-or-url/daloradius`
+* User: `administrator` Password: `radius`
 
 ## Tags
 
@@ -42,7 +44,7 @@ If you are using armhf you have to change the MariaDB image. I have provided an 
 version: "3"
 services:
   radius:
-    image: frauhottelmann/daloradius-docker
+    image: frauhottelmann/daloradius-docker:tag #you need to change the tag to your arch and the desired version
     container_name: radius
     restart: always
     depends_on:
