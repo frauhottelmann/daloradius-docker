@@ -1,7 +1,5 @@
 # Daloradius
 
-`armhf with focal doesn't build right now due to a bug in libc6`
-
 ## About
 
 * Docker image for Daloradius based on Ubuntu 20.04
