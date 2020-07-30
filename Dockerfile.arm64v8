@@ -51,17 +51,18 @@ RUN apt-get update \
                     php-mail \
                     php-mail-mime \
                     php-db \
-                    php-pear \
                     php-mysql \
                     mariadb-client \
                     libmysqlclient-dev \
                     supervisor \
                     unzip \
                     wget \
- && apt-get clean \
  && rm -rf /var/lib/apt/lists/* \
  && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
  && mkdir -p /tmp/pear/cache \
+ && wget http://pear.php.net/go-pear.phar \
+ && php go-pear.phar \
+ && pear channel-update pear.php.net \
  && pear install -a -f DB \
  && pear install -a -f Mail \
  && pear install -a -f Mail_Mime
