@@ -1,4 +1,4 @@
-# Daloradius
+# Daloradius in Docker
 
 ## About
 
@@ -11,7 +11,7 @@
 ## Tags
 
 * versions correspond to Daloradius verisons
-* right now I build amd64, aarch64 and armh32v7
+* Docker Hub auto builds amd64, arm64v8 and arm32v7
 
 ## Environment variables
 
