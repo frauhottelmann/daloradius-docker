@@ -2,7 +2,7 @@
 
 ## About
 
-* Docker image for Daloradius based on Ubuntu 20.04
+* Docker image for Daloradius based on latest Ubuntu LTS
 * includes freeradius 3, Apache, php, MariaDB-client
 * needs a separate MariaDB
 * access under `your-ip-or-url/daloradius`
@@ -11,8 +11,7 @@
 ## Tags
 
 * versions correspond to Daloradius verisons
-* the tags are prefixed by the platform
-* right now I build amd64, aarch64 and armhf
+* right now I build amd64, aarch64 and armh32v7
 
 ## Environment variables
 
