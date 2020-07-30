@@ -1,7 +1,7 @@
 FROM arm64v8/ubuntu:20.04
 
 # Copy downloaded architecture emulation static binary
-COPY qemu-arm-static /usr/bin/
+COPY qemu-aarch64-static /usr/bin/
 
 STOPSIGNAL SIGKILL
 
