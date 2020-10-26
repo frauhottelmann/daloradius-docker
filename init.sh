@@ -34,7 +34,7 @@ ln -s /etc/freeradius/3.0/sites-available/status /etc/freeradius/3.0/sites-enabl
 # Set Database connection
 sed -i 's|^#\s*server = .*|server = "'$MYSQL_HOST'"|' /etc/freeradius/3.0/mods-available/sql
 sed -i 's|^#\s*port = .*|port = "'$MYSQL_PORT'"|' /etc/freeradius/3.0/mods-available/sql
-sed -i 's|^#\s*radius_db = .*|radius_db = "'$MYSQL_DATABASE'"|' /etc/freeradius/3.0/mods-available/sql
+sed -i '1,$s/radius_db.*/radius_db="'$MYSQL_DATABASE'"/g' /etc/freeradius/3.0/mods-available/sql
 sed -i 's|^#\s*password = .*|password = "'$MYSQL_PASSWORD'"|' /etc/freeradius/3.0/mods-available/sql 
 sed -i 's|^#\s*login = .*|login = "'$MYSQL_USER'"|' /etc/freeradius/3.0/mods-available/sql
 
