@@ -67,7 +67,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
  && pear install -a -f Mail \
  && pear install -a -f Mail_Mime
 
-ENV DALO_VERSION 1.1-2
+ENV DALO_VERSION 1.1-3
 
 RUN wget https://github.com/lirantal/daloradius/archive/"$DALO_VERSION".zip \
  && unzip "$DALO_VERSION".zip \
