@@ -29,7 +29,7 @@ ENV MYSQL_DATABASE radius
 ENV TZ Europe/Berlin
 
 RUN apt-get update \
- && apt-get install --yes --no-install-recommends \
+ && apt-get install --yes \
                     apt-utils \
                     tzdata \
                     apache2 \
@@ -54,6 +54,7 @@ RUN apt-get update \
                     supervisor \
                     unzip \
                     wget \
+                    vim \
  && rm -rf /var/lib/apt/lists/*
  
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
@@ -72,17 +73,33 @@ ENV DALO_VERSION 1.1-3
 RUN wget https://github.com/lirantal/daloradius/archive/"$DALO_VERSION".zip \
  && unzip "$DALO_VERSION".zip \
  && rm "$DALO_VERSION".zip \
- && mv daloradius-"$DALO_VERSION" /var/www/html/daloradius \
- && chown -R www-data:www-data /var/www/html/daloradius \
- && chmod 644 /var/www/html/daloradius/library/daloradius.conf.php
+ && rm -rf /var/www/html/index.html \
+ && mv daloradius-"$DALO_VERSION"/* daloradius-"$DALO_VERSION"/.gitignore daloradius-"$DALO_VERSION"/.htaccess daloradius-"$DALO_VERSION"/.htpasswd /var/www/html \
+ && chown -R www-data:www-data /var/www/html \
+ && chmod 644 /var/www/html/library/daloradius.conf.php
 
 EXPOSE 1812 1813 80
 
 COPY supervisor-apache2.conf /etc/supervisor/conf.d/apache2.conf
 COPY supervisor-freeradius.conf /etc/supervisor/conf.d/freeradius.conf
+COPY supervisor-dalocron.conf /etc/supervisor/conf.d/supervisor-dalocron.conf
 COPY freeradius-default-site /etc/freeradius/3.0/sites-available/default
 
 COPY init.sh /cbs/
 COPY supervisor.conf /etc/
+
+# Init freeradius config
+RUN set -ex \
+  # Enable SQL in freeradius
+  && sed -i 's|driver = "rlm_sql_null"|driver = "rlm_sql_mysql"|' /etc/freeradius/3.0/mods-available/sql \
+  && sed -i 's|dialect = "sqlite"|dialect = "mysql"|' /etc/freeradius/3.0/mods-available/sql \
+  && sed -i 's|dialect = ${modules.sql.dialect}|dialect = "mysql"|' /etc/freeradius/3.0/mods-available/sqlcounter \
+  && sed -i '/tls {/,/}/s/\(.*\)/#AUTO_COMMENT#&/' /etc/freeradius/3.0/mods-available/sql \
+  && sed -i 's|#\s*read_clients = yes|read_clients = yes|' /etc/freeradius/3.0/mods-available/sql \
+  && ln -s /etc/freeradius/3.0/mods-available/sql /etc/freeradius/3.0/mods-enabled/sql \
+  && ln -s /etc/freeradius/3.0/mods-available/sqlcounter /etc/freeradius/3.0/mods-enabled/sqlcounter \
+  && sed -i 's|instantiate {|instantiate {\nsql|' /etc/freeradius/3.0/radiusd.conf \
+  # Enable status in freeadius
+  && ln -s /etc/freeradius/3.0/sites-available/status /etc/freeradius/3.0/sites-enabled/status
 
 CMD ["sh", "/cbs/init.sh"]
