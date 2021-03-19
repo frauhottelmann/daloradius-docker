@@ -75,6 +75,7 @@ RUN wget https://github.com/lirantal/daloradius/archive/"$DALO_VERSION".zip \
  && rm "$DALO_VERSION".zip \
  && rm -rf /var/www/html/index.html \
  && mv daloradius-"$DALO_VERSION"/* daloradius-"$DALO_VERSION"/.gitignore daloradius-"$DALO_VERSION"/.htaccess daloradius-"$DALO_VERSION"/.htpasswd /var/www/html \
+ && mv /var/www/html/library/daloradius.conf.php.sample /var/www/html/library/daloradius.conf.php \
  && chown -R www-data:www-data /var/www/html \
  && chmod 644 /var/www/html/library/daloradius.conf.php
 
