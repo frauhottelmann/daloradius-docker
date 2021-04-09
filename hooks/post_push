@@ -10,10 +10,14 @@ DEFAULT_ARCH="linux/amd64"
 ## Use manifest-tool to create the manifest, given the experimental
 ## "docker manifest" command isn't available yet on Docker Hub.
 TOOL_DOWNLOAD_URL="https://github.com/estesp/manifest-tool/releases/download"
-TOOL_LATEST_TAG=$(curl -s https://api.github.com/repos/estesp/manifest-tool/tags \
-    | grep 'name.*v[0-9]' \
-    | head -n 1 \
-    | cut -d '"' -f 4)
+
+##quick workaround manifest tool 2 beta:
+TOOL_LATEST_TAG="v1.0.3"
+
+#TOOL_LATEST_TAG=$(curl -s https://api.github.com/repos/estesp/manifest-tool/tags \
+#    | grep 'name.*v[0-9]' \
+#    | head -n 1 \
+#    | cut -d '"' -f 4)
 
 echo "[***] Downloading ${TOOL_DOWNLOAD_URL}/${TOOL_LATEST_TAG}/manifest-tool-linux-amd64"
 curl -Lo manifest-tool ${TOOL_DOWNLOAD_URL}/${TOOL_LATEST_TAG}/manifest-tool-linux-amd64
