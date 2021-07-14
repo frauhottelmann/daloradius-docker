@@ -106,4 +106,4 @@ RUN set -ex \
   # Enable status in freeadius
   && ln -s /etc/freeradius/3.0/sites-available/status /etc/freeradius/3.0/sites-enabled/status
 
-CMD ["sh", "/cbs/init.sh"]
+CMD ["bash", "/cbs/init.sh"]
