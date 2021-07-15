@@ -87,6 +87,11 @@ COPY supervisor-dalocron.conf /etc/supervisor/conf.d/supervisor-dalocron.conf
 COPY freeradius-default-site /etc/freeradius/3.0/sites-available/default
 
 COPY init.sh /cbs/
+RUN set -ex \
+  && chmod a+x /cbs/init.sh \
+  && chmod -w /cbs/init.sh \
+  && chattr +i /cbs/init.sh
+
 COPY supervisor.conf /etc/
 
 # Init freeradius config
@@ -103,4 +108,4 @@ RUN set -ex \
   # Enable status in freeadius
   && ln -s /etc/freeradius/3.0/sites-available/status /etc/freeradius/3.0/sites-enabled/status
 
-CMD ["bash", "/cbs/init.sh"]
+CMD ["/cbs/init.sh"]

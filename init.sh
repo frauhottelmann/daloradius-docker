@@ -1,16 +1,21 @@
 #!/bin/bash
 set -ex
 
-# set init failed flag, used for next running
-echo '#!/bin/bash' > /cbs/init.sh
-echo 'echo "Initialization error" 1>&2' >> /cbs/init.sh
-
 DEBIAN_FRONTEND=noninteractive
 
 # wait for MySQL-Server to be ready
 while ! mysqladmin ping -h"$MYSQL_HOST" --silent; do
     sleep 20
 done
+
+if [ -e /cbs/init.done ]
+then
+    echo "Ready to running service..."
+
+    supervisord -c /etc/supervisor.conf
+else
+    echo "Not ready, go to first init..."
+fi
 
 # check if the database if empty
 table_count=$(mysql -h "$MYSQL_HOST" -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" "$MYSQL_DATABASE" -se "SELECT COUNT(DISTINCT \`table_name\`) FROM \`information_schema\`.\`columns\` WHERE \`table_schema\` = '$MYSQL_DATABASE'")
@@ -47,10 +52,9 @@ sed -i "s/\$configValues\['CONFIG_DB_PASS'\] = .*;/\$configValues\['CONFIG_DB_PA
 sed -i "s/\$configValues\['CONFIG_DB_USER'\] = .*;/\$configValues\['CONFIG_DB_USER'\] = '$MYSQL_USER';/" /var/www/html/contrib/scripts/maintenance/cleanStaleSessions.php
 sed -i "s/\$configValues\['CONFIG_DB_NAME'\] = .*;/\$configValues\['CONFIG_DB_NAME'\] = '$MYSQL_DATABASE';/" /var/www/html/contrib/scripts/maintenance/cleanStaleSessions.php
 
-# replace init.sh
-rm -r /cbs/*
-echo '#!/bin/bash' > /cbs/init.sh
-echo 'supervisord -c /etc/supervisor.conf' >> /cbs/init.sh
+# touch init flag
+touch /cbs/init.done
+chattr +i /cbs/init.done
 
-# run supervisord after first init
+# run service after first init
 supervisord -c /etc/supervisor.conf
