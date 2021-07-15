@@ -54,7 +54,6 @@ sed -i "s/\$configValues\['CONFIG_DB_NAME'\] = .*;/\$configValues\['CONFIG_DB_NA
 
 # touch init flag
 touch /cbs/init.done
-chattr +i /cbs/init.done
 
 # run service after first init
 supervisord -c /etc/supervisor.conf
